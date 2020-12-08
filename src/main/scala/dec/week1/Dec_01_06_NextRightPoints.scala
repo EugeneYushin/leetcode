@@ -14,7 +14,7 @@ class Node(var _value: Int) {
  * author https://github.com/EugeneYushin
  * https://leetcode.com/explore/featured/card/december-leetcoding-challenge/569/week-1-december-1st-december-7th/3556/
  */
-object Dec_01_07_NextRightPoints {
+object Dec_01_06_NextRightPoints {
   def nextRight(node: Node): Node = {
     if (node == null) null
     else Option(node.left).orElse(Option(node.right)).getOrElse(nextRight(node.next))

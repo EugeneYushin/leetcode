@@ -5,7 +5,7 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.collection.mutable
 
-class Dec_01_07_NextRightPointsTest extends AnyFlatSpec with Matchers {
+class Dec_01_06_NextRightPointsTest extends AnyFlatSpec with Matchers {
   def createNode(i: Int, arr: Array[Integer]): Node = {
     if (i <= arr.length) {
       if (arr(i - 1) == null) {
@@ -66,7 +66,7 @@ class Dec_01_07_NextRightPointsTest extends AnyFlatSpec with Matchers {
     val input = Array[Integer](2,1,3,0,7,9,1,2,null,1,0,null,null,8,8,null,null,null,null,7)
     val root = createNode(1, input)
 
-    val actual = Dec_01_07_NextRightPoints.connect(root)
+    val actual = Dec_01_06_NextRightPoints.connect(root)
 
     stringify(actual) shouldEqual "2#13#0791#21088#7#"
   }
