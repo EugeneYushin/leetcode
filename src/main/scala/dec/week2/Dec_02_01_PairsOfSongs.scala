@@ -4,7 +4,7 @@ package dec.week2
   * author https://github.com/EugeneYushin
   * https://leetcode.com/explore/challenge/card/december-leetcoding-challenge/570/week-2-december-8th-december-14th/3559/
   */
-object Dec_02_01_ParisOfSongs {
+object Dec_02_01_PairsOfSongs {
   def numOfCombinationsBy2(n: Int): Int = (n - 1) * n / 2
 
   def numPairsDivisibleBy60(time: Array[Int]): Int = {
