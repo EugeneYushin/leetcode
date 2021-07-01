@@ -3,12 +3,12 @@ package google;
 import java.util.Stack;
 
 class Tuple2<F, S> {
-    F first;
-    S second;
+    F _1;
+    S _2;
 
     Tuple2(F f, S s) {
-        first = f;
-        second = s;
+        _1 = f;
+        _2 = s;
     }
 }
 
@@ -59,7 +59,7 @@ class DecodeString {
     }
 
     String decodeStringRecursive(String s) {
-        return decode(s).first;
+        return decode(s)._1;
     }
 
     private Tuple2<String, Integer> decode(String s) {
@@ -75,8 +75,8 @@ class DecodeString {
                     repeats = 10 * repeats + Character.getNumericValue(s.charAt(i++));
                 }
                 Tuple2<String, Integer> decoded = decode(s.substring(++i));
-                builder.append(repeat(decoded.first, repeats));
-                i += decoded.second;
+                builder.append(repeat(decoded._1, repeats));
+                i += decoded._2;
             } else {
                 builder.append(s.charAt(i++));
             }
