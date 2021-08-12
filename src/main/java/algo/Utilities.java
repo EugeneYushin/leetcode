@@ -25,4 +25,20 @@ class ListNode {
     public int hashCode() {
         return Objects.hash(val, next);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[").append(val).append(",");
+
+        ListNode p = this;
+        while (p.next != null) {
+            p = p.next;
+            builder.append(p.val).append(",");
+        }
+
+        builder.deleteCharAt(builder.length() - 1);
+        builder.append("]");
+        return builder.toString();
+    }
 }
