@@ -1,6 +1,9 @@
 package algo;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 
 /**
  * Definition for singly-linked list.
@@ -39,6 +42,67 @@ class ListNode {
 
         builder.deleteCharAt(builder.length() - 1);
         builder.append("]");
+        return builder.toString();
+    }
+
+    public static ListNode fromArray(int[] arr) {
+        ListNode head = new ListNode();
+        ListNode curr = head;
+        for (int i : arr) {
+            curr.next = new ListNode(i);
+            curr = curr.next;
+        }
+        return arr.length == 0 ? head : head.next;
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ */
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TreeNode node = (TreeNode) o;
+        return val == node.val &&
+                Objects.equals(left, node.left) &&
+                Objects.equals(right, node.right);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(this);
+        q.add(null);
+
+        while (!q.isEmpty()) {
+            TreeNode node = q.poll();
+            if (node == null) {
+                builder.append("\n");
+                if (!q.isEmpty()) q.add(null);
+                continue;
+            }
+
+            builder.append(node.val).append(" ");
+
+            if (node.left != null) q.add(node.left);
+            if (node.right != null) q.add(node.right);
+        }
+
         return builder.toString();
     }
 }
