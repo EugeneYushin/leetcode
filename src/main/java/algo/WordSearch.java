@@ -7,7 +7,7 @@ public class WordSearch {
     /**
      * Depth-first-search based solution
      * Time complexity: O(M*N*4^s), M - num of rows, N - num of cols, s - length of the word
-     * Space complexity: O(4^s)
+     * Space complexity: O(s)
      */
     public boolean exist(char[][] board, String word) {
         if (word == null || word.isEmpty() ||
