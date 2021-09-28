@@ -13,9 +13,9 @@ class SortArrayByParity2Test {
     }
 
     @Test
-    void sortArrayByParityII_2passes() {
+    void sortArrayByParityII_2heads() {
         SortArrayByParity2 cl = new SortArrayByParity2();
-        assertArrayEquals(new int[]{4, 5, 2, 7}, cl.sortArrayByParityII_2passes(new int[]{4, 2, 5, 7}));
-        assertArrayEquals(new int[]{4, 1, 0, 1, 0, 1}, cl.sortArrayByParityII_2passes(new int[]{4, 1, 1, 0, 1, 0}));
+        assertArrayEquals(new int[]{4, 5, 2, 7}, cl.sortArrayByParityII_2heads(new int[]{4, 2, 5, 7}));
+        assertArrayEquals(new int[]{4, 1, 0, 1, 0, 1}, cl.sortArrayByParityII_2heads(new int[]{4, 1, 1, 0, 1, 0}));
     }
 }
