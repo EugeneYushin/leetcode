@@ -1,5 +1,8 @@
 package algo;
 
+/**
+ * https://leetcode.com/problems/partition-to-k-equal-sum-subsets/
+ */
 public class PartitionToKEqualSumSubsets {
     /**
      * Back-tracking solution
