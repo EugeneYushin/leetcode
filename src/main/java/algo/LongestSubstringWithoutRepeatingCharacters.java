@@ -1,6 +1,13 @@
 package algo;
 
+/**
+ * https://leetcode.com/problems/longest-substring-without-repeating-characters/
+ */
 public class LongestSubstringWithoutRepeatingCharacters {
+    /**
+     * Time complexity: O(N)
+     * Space complexity: O(1)
+     */
     public int lengthOfLongestSubstring(String s) {
         int length = 0;
         int[] cache = new int[128];
