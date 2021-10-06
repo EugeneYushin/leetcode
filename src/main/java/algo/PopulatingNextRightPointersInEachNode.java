@@ -26,6 +26,9 @@ class Node {
 };
 */
 
+/**
+ * https://leetcode.com/problems/populating-next-right-pointers-in-each-node/
+ */
 public class PopulatingNextRightPointersInEachNode {
     /**
      * DSF pre-order, Take and advantage of already discovered node.next value to set node.right.next
