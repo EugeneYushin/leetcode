@@ -27,10 +27,6 @@ class TrieTest {
         assertTrue(t.startsWith("z"));
         assertTrue(t.startsWith("zo"));
         assertTrue(t.startsWith("zoo"));
-
-
-//        ["Trie","insert","search","search","startsWith","startsWith","insert","search","startsWith","insert","search","startsWith"]
-//        [[],    ["ab"],  ["abc"],   ["ab"],["abc"],["ab"],           ["ab"],  ["abc"],["abc"],["abc"],["abc"],["abc"]]
     }
 
     @Test
