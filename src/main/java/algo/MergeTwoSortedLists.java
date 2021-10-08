@@ -12,7 +12,9 @@ package algo;
  */
 class MergeTwoSortedLists {
     /**
-     * Iterative version, could cause StackOverflow for O(n) time compelxity
+     * Recursive version
+     * Time complexity: O(l1 + l2)
+     * Space complexity: O(l1 + l2)
      */
     public ListNode mergeTwoListsIterative(ListNode l1, ListNode l2) {
         if (l1 == null) return l2;
@@ -27,7 +29,11 @@ class MergeTwoSortedLists {
         }
     }
 
-    // 2,4,5        3,4,6
+    /**
+     * Iterative
+     * Time complexity: O(l1 + l2)
+     * Space complexity: O(1)
+     */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode sorted = new ListNode();
         ListNode handler = sorted;
@@ -44,9 +50,7 @@ class MergeTwoSortedLists {
             handler = handler.next;
         }
 
-        if (l1 == null) handler.next = l2;
-        else handler.next = l1;
-
+        handler.next = l1 == null ? l2 : l1;
         return sorted.next;
     }
 }
