@@ -1,87 +1,78 @@
 package algo;
 
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
-public class Trie {
-    public static void main(String[] args) {
-        SortedSet<String> set = new TreeSet<>();
-        set.add("am");
-        set.add("hack_z");
-        set.add("hack");
-        set.add("pm");
-        set.add("hack_x");
-        set.add("adam");
-        set.add("hack_y");
+/**
+ * https://leetcode.com/problems/implement-trie-prefix-tree/
+ */
+class Trie {
+    class TrieNode {
+        boolean isWord = false;
+        TrieNode[] next = new TrieNode[26];
 
-        SortedSet<String> tail = set.tailSet("hac");
-        System.out.println("tail = " + tail);
+        @Override
+        public String toString() {
+            char[] chars = new char[next.length];
+            for (int i = 0; i < next.length; i++) {
+                if (next[i] != null) chars[i] = (char)('a' + i);
+            }
 
-        // TODO filter and compare with prefix
-        List<String> first3 = tail.stream().limit(3).collect(Collectors.toList());
-        System.out.println("first3 = " + first3);
+            return "TrieNode{" +
+                    "isWord=" + isWord +
+                    ", next=" + Arrays.toString(chars) +
+                    '}';
+        }
+    }
+
+    TrieNode root;
+
+    /** Initialize your data structure here. */
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
+        TrieNode head = root;
+        for (int i = 0; i < word.length(); i++) {
+            if (head.next[word.charAt(i) - 'a'] == null) {
+                TrieNode nextNode = new TrieNode();
+                head.next[word.charAt(i) - 'a'] = nextNode;
+                head = nextNode;
+            } else {
+                head = head.next[word.charAt(i) - 'a'];
+            }
+        }
+
+        head.isWord = true;
+    }
+
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
+        TrieNode head = root;
+        for (int i = 0; i < word.length(); i++) {
+            if (head.next == null || head.next[word.charAt(i) - 'a'] == null) return false;
+            else head = head.next[word.charAt(i) - 'a'];
+        }
+
+        return head.isWord;
+    }
+
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
+        TrieNode head = root;
+        for (int i = 0; i < prefix.length(); i++) {
+            if (head.next == null || head.next[prefix.charAt(i) - 'a'] == null) return false;
+            else head = head.next[prefix.charAt(i) - 'a'];
+        }
+        return true;
     }
 }
 
-//class TrieNode {
-//    Character ch;
-//    boolean isLeaf;
-//    Map<Character, TrieNode> children;
-//
-//    public TrieNode() {
-//        this.children = new HashMap<>();
-//        this.isLeaf = false;
-//    }
-//
-//    public TrieNode(Character ch) {
-//        this.ch = ch;
-//        this.children = new HashMap<>();
-//        this.isLeaf = false;
-//    }
-//}
-//
-//class Trie {
-//    TrieNode root = new TrieNode();
-//
-//    public void insert(String word) {
-//        TrieNode current = root;
-//        for (Character letter : word.toCharArray()) {
-//            current = current.children.computeIfAbsent(letter, l -> new TrieNode(l));
-//        }
-//        current.isLeaf = true;
-//    }
-//
-//    public List<String> find(String prefix) {
-//        TrieNode prefixNode = root;
-//        List<String> result = new LinkedList<>();
-//
-//        for (Character l : prefix.toCharArray()) {
-//            prefixNode = prefixNode.children.get(l);
-//            if (prefixNode == null) return Collections.emptyList();
-//        }
-//
-//        findInner(prefix.substring(0, prefix.length() - 1), prefixNode, result);
-//        return result;
-//    }
-//
-//    private void findInner (String prefix, TrieNode node, List<String> words) {
-//        if (node.isLeaf) words.add(prefix + node.ch);
-//        node.children.values().forEach(child -> findInner(prefix + node.ch, child, words));
-//    }
-//}
-//
-//class Main {
-//    public static void main(String[] args) {
-//        Trie prefixTrie = new Trie();
-//        prefixTrie.insert("Hello");
-//        prefixTrie.insert("Hell");
-//        prefixTrie.insert("Hi");
-//
-//        List<String> words = prefixTrie.find("He");
-//        System.out.println("words = " + words);
-//
-//        System.out.println("");
-//    }
-//}
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
