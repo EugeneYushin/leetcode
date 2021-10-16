@@ -13,8 +13,8 @@ public class BestTimeToBuyAndSellStock3 {
         for (int k = 1; k <= 2; k++) {
             int max = dp[k - 1][0] - prices[0];
             for (int i = 1; i < prices.length; i++) {
-                dp[k][i] = Math.max(dp[k][i - 1], prices[i] + max);
-                max = Math.max(max, dp[k - 1][i] - prices[i]);
+                dp[k][i] = Math.max(dp[k][i - 1], prices[i] + max); // max from doing nothing or selling stock
+                max = Math.max(max, dp[k - 1][i] - prices[i]);      // this max lefts behind i, so it's max up to i
             }
         }
 
