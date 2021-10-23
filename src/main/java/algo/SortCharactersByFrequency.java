@@ -45,7 +45,7 @@ public class SortCharactersByFrequency {
             counts[s.charAt(i) - '0'][1] = s.charAt(i);
         }
 
-        // sort by count in decreasing order
+        // sort by count in descending order
         Arrays.sort(counts, Comparator.comparingInt(o -> -o[0]));
 
         StringBuilder sb = new StringBuilder(s.length());
