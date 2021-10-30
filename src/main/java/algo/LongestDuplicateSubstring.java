@@ -6,6 +6,9 @@ import java.util.*;
  * https://leetcode.com/problems/longest-duplicate-substring/
  */
 public class LongestDuplicateSubstring {
+    /**
+     * Rolling hash
+     */
     public String longestDupSubstring(String S) {
         String ans = "";
         int left = 1;
@@ -55,7 +58,10 @@ public class LongestDuplicateSubstring {
         return (hash - (left - 'a' + 1) * pow) * 31 + (right - 'a' + 1);
     }
 
-
+    /**
+     * Use Set for hashing
+     * Memory Limit Exceeds
+     */
     public String longestDupSubstring_set(String s) {
         if (s == null || s.length() < 2) return "";
 
@@ -88,7 +94,9 @@ public class LongestDuplicateSubstring {
         return duplicate;
     }
 
-    /*public String longestDupSubstring(String s) {
+    /*
+    // Single-loop Trie, doesn't work for 'bnaaknak' due to n -> [a, ak] satisfies 'nak' (vs 'naak')
+    public String longestDupSubstring(String s) {
         if (s == null || s.length() < 2) return "";
 
         String duplicate = "";
@@ -124,5 +132,6 @@ public class LongestDuplicateSubstring {
         }
 
         return duplicate;
-    }*/
+    }
+    */
 }
