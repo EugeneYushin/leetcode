@@ -1,42 +1,23 @@
 package algo;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
+/**
+ * https://leetcode.com/problems/rotate-image
+ */
 public class RotateImage {
     /**
      * Time complexity: O(N^2)
-     * Space complexity: O(N)
+     * Space complexity: O(1)
      */
     public void rotate(int[][] matrix) {
         int n = matrix.length;
-        if (n < 2) return;
-
-        int mid = ((n & 1) == 0) ? n / 2 + 1 : n / 2;
-        int step = 0;
-        Queue<Integer> q = new LinkedList<>();
-
-        while (step < mid) {
-            for (int i = step; i < n - step - 1; i++) {
-                q.add(matrix[i][n - step - 1]);
-                matrix[i][n - step - 1] = matrix[step][i];
+        for (int i = 0; i < (n + 1) / 2; i++) {
+            for (int j = i; j < n - i - 1; j++) {
+                int p4 = matrix[n - j - 1][i];
+                matrix[n - j - 1][i] = matrix[n - i - 1][n - j - 1];    // p3 -> p4
+                matrix[n - i - 1][n - j - 1] = matrix[j][n - i - 1];    // p2 -> p3
+                matrix[j][n - i - 1] = matrix[i][j];  // p1 -> p2
+                matrix[i][j] = p4;  // p4 -> p1
             }
-
-            for (int i = step; i < n - step - 1; i++) {
-                q.add(matrix[n - step - 1][n - i - 1]);
-                matrix[n - step - 1][n - i - 1] = q.poll();
-            }
-
-            for (int i = n - step - 1; i > step; i--) {
-                q.add(matrix[i][step]);
-                matrix[i][step] = q.poll();
-            }
-
-            for (int i = step; i < n - step - 1; i++) {
-                matrix[step][i] = q.poll();
-            }
-
-            step++;
         }
     }
 }
