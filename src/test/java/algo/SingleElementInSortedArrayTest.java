@@ -13,4 +13,12 @@ class SingleElementInSortedArrayTest {
         assertEquals(2, cl.singleNonDuplicate(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
         assertEquals(10, cl.singleNonDuplicate(new int[]{3, 3, 7, 7, 10, 11, 11}));
     }
+
+    @Test
+    void singleNonDuplicate_searchInPairs() {
+        SingleElementInSortedArray cl = new SingleElementInSortedArray();
+        assertEquals(42, cl.singleNonDuplicate_searchInPairs(new int[]{42}));
+        assertEquals(2, cl.singleNonDuplicate_searchInPairs(new int[]{1, 1, 2, 3, 3, 4, 4, 8, 8}));
+        assertEquals(10, cl.singleNonDuplicate_searchInPairs(new int[]{3, 3, 7, 7, 10, 11, 11}));
+    }
 }
