@@ -63,6 +63,10 @@ public class AccountsMerge {
         }
     }
 
+    /**
+     * Time complexity: O(N*logN), N - all emails
+     * Space complexity: O(N)
+     */
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
         UnionFind uf = new UnionFind();
         for (List<String> acc : accounts) {
