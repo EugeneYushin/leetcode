@@ -20,10 +20,9 @@ public class OddEvenLinkedList {
      * Space complexity: O(1)
      */
     public ListNode oddEvenList(ListNode head) {
-        if (head == null || head.next == null) return head;
+        if (head == null) return head;
 
         ListNode odd = head;
-        ListNode dummyOdd = odd;
 
         ListNode even = head.next;
         ListNode dummyEven = even;
@@ -37,6 +36,6 @@ public class OddEvenLinkedList {
         }
 
         odd.next = dummyEven;
-        return dummyOdd;
+        return head;
     }
 }
