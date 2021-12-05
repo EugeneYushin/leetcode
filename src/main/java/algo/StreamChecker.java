@@ -5,6 +5,69 @@ import java.util.List;
 
 class StreamChecker {
     class Node {
+        Node[] next = new Node[26];
+        boolean isWord;
+
+        public void add(String s) {
+            Node current = this;
+
+            for (int i = s.length() - 1; i >= 0; i--) {
+                char c = s.charAt(i);
+                if (current.next[c - 'a'] == null) {
+                    current.next[c - 'a'] = new Node();
+                }
+                current = current.next[c - 'a'];
+            }
+
+            current.isWord = true;
+        }
+    }
+
+    int maxLength;
+    Node root;
+    StringBuilder sb;
+
+    /**
+     * Time complexity: O(N*Lmax)
+     * Space complexity: O(N*Lmax)
+     */
+    public StreamChecker(String[] words) {
+        root = new Node();
+        maxLength = 0;
+        for (String w : words) {
+            root.add(w);
+            maxLength = Math.max(maxLength, w.length());
+        }
+
+        sb = new StringBuilder(maxLength);
+    }
+
+    /**
+     * Time complexity: O(Lmax)
+     * Space complexity: O(1)
+     */
+    public boolean query(char letter) {
+        if (sb.length() == maxLength) {
+            sb.deleteCharAt(0);
+        }
+
+        sb.append(letter);
+        Node head = root;
+
+        for (int i = sb.length() - 1; i >= 0; i--) {
+            char c = sb.charAt(i);
+            if (head.next[c - 'a'] == null) break;
+            if (head.next[c - 'a'].isWord) return true;
+            head = head.next[c - 'a'];
+        }
+
+        return false;
+    }
+}
+
+
+class StreamChecker_WithCandidates {
+    class Node {
         Node[] next;
         boolean isWord;
 
@@ -36,7 +99,7 @@ class StreamChecker {
     Node root;
     List<Node> candidates;
 
-    public StreamChecker(String[] words) {
+    public StreamChecker_WithCandidates(String[] words) {
         this.root = new Node();
         for (String w : words) {
             this.root.add(w);
