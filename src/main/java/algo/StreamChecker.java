@@ -3,6 +3,9 @@ package algo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Reverse Trie
+ */
 class StreamChecker {
     class Node {
         Node[] next = new Node[26];
