@@ -6,26 +6,23 @@ public class InsertionSortList {
      * Space complexity: O(1)
      */
     public ListNode insertionSortList(ListNode head) {
-        ListNode sortedHead = new ListNode(head.val);   // set sorted head next to null
-        ListNode current = sortedHead;
-        ListNode previous = null;
-        head = head.next;
+        ListNode dummy = new ListNode();
+        ListNode current = head;
 
-        while (head != null) {
-            while (current != null && current.val < head.val) {
-                previous = current;
-                current = current.next;
+        while (current != null) {
+            ListNode prev = dummy;
+
+            while (prev.next != null && prev.next.val < current.val) {
+                prev = prev.next;
             }
 
-            ListNode tmp = head.next;
-            head.next = current;
-            if (previous == null) sortedHead = head;
-            else previous.next = head;
-            head = tmp;
-            current = sortedHead;
-            previous = null;
+            ListNode tmp = current.next;
+            current.next = prev.next;
+            prev.next = current;
+
+            current = tmp;
         }
 
-        return sortedHead;
+        return dummy.next;
     }
 }
