@@ -2,6 +2,9 @@ package algo;
 
 import java.util.Arrays;
 
+/**
+ * https://leetcode.com/problems/maximal-rectangle/
+ */
 public class MaximalRectangle {
     /**
      * DP solution
