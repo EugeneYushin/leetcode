@@ -12,43 +12,35 @@ public class CourseSchedule {
      * Space complexity: O(n)
      */
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        Map<Integer, List<Integer>> outputEdges = new HashMap<>();
-        Map<Integer, Integer> countOfInputLinks = new HashMap<>();
+        List<Integer>[] outputEdges = new ArrayList[numCourses];
+        int[] countOfInputLinks = new int[numCourses];
 
         for (int[] p : prerequisites) {
-            countOfInputLinks.put(p[0], countOfInputLinks.getOrDefault(p[0], 0) + 1);
-            countOfInputLinks.putIfAbsent(p[1], 0);
-
-            List<Integer> outEdge = outputEdges.getOrDefault(p[1], new ArrayList<>());
-            outEdge.add(p[0]);
-            outputEdges.put(p[1], outEdge);
-        }
-
-        List<Integer> leaves = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> e : countOfInputLinks.entrySet()) {
-            if (e.getValue() == 0) leaves.add(e.getKey());
-        }
-
-        while (!leaves.isEmpty()) {
-            List<Integer> newLeaves = new ArrayList<>();
-
-            for (int l : leaves) {
-                countOfInputLinks.remove(l);
-                if (outputEdges.containsKey(l)) {
-                    for (int n : outputEdges.get(l)) {
-                        int prev = countOfInputLinks.get(n);
-                        if (prev == 1) {
-                            newLeaves.add(n);
-                        } else {
-                            countOfInputLinks.put(n, prev - 1);
-                        }
-                    }
-                }
+            countOfInputLinks[p[0]]++;
+            if (outputEdges[p[1]] == null) {
+                outputEdges[p[1]] = new ArrayList<>();
             }
 
-            leaves = newLeaves;
+            outputEdges[p[1]].add(p[0]);
         }
 
-        return countOfInputLinks.isEmpty();
+        Queue<Integer> leaves = new LinkedList<>();
+        for (int i = 0; i < countOfInputLinks.length; i++) {
+            if (countOfInputLinks[i] == 0) leaves.add(i);
+        }
+
+        int count = 0;
+        while (!leaves.isEmpty()) {
+            count++;
+            int leaf = leaves.poll();
+            List<Integer> neighbours = outputEdges[leaf];
+            if (neighbours != null) {
+                for (int neighbour : neighbours) {
+                    if (--countOfInputLinks[neighbour] == 0) leaves.add(neighbour);
+                }
+            }
+        }
+
+        return numCourses == count;
     }
 }
